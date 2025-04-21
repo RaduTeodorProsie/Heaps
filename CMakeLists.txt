@@ -3,4 +3,18 @@ project(Heaps)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Heaps main.cpp)
+# Include directories
+include_directories(include)
+
+set(SOURCES
+        main.cpp
+
+        src/quaternary.cpp
+        src/pairing.cpp
+        src/twothree.cpp
+        src/priority_queue.cpp
+)
+
+
+# Executable target
+add_executable(Heaps ${SOURCES})
