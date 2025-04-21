@@ -11,7 +11,7 @@ set(SOURCES
 
         src/quaternary.cpp
         src/pairing.cpp
-        src/twothree.cpp
+        src/Rheap.cpp
         src/priority_queue.cpp
 )
 
