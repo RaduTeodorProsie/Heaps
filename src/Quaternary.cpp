@@ -1,9 +1,12 @@
 #include <stdexcept>
 #include <vector>
 
-template <typename T, typename Compare = std::greater<T>> class quaternary {
+template <typename T, typename Compare = std::greater<T>> class Quaternary {
   std::vector<T> heap;
   Compare comp;
+
+  // O(1) swap, top, O(log(heap_size)) for pop and push, O(log(heap_size))
+  // amortized for meld. (by small to large)
 
 public:
   [[nodiscard]] size_t size() const { return heap.size(); }
@@ -21,7 +24,7 @@ public:
     }
   }
 
-  T top() {
+  const T &top() const {
     if (heap.empty())
       throw std::out_of_range("top on empty");
     return heap[0];
@@ -49,15 +52,14 @@ public:
     }
   }
 
-  static void swap(quaternary &a, quaternary &b) noexcept {
-    using std::swap;
-    swap(a.heap, b.heap);
-    swap(a.comp, b.comp);
+  void swap(Quaternary &other) noexcept {
+    std::swap(heap, other.heap);
+    std::swap(comp, other.comp);
   }
 
-  void meld(quaternary<T> &other) {
+  void meld(Quaternary<T> &other) {
     if (other.size() > size())
-      quaternary::swap(*this, other);
+      swap(other);
 
     for (const T &val : other.heap) {
       push(val);
