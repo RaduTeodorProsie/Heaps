@@ -4,7 +4,8 @@
 #include <stdexcept>
 #include <vector>
 
-template <typename T, typename Compare = std::less<T>> class PairingHeap {
+template <typename T, typename Compare = std::less<T>> 
+class PairingHeap {
   struct Node;
   using NodePtr = std::shared_ptr<Node>;
 
@@ -67,6 +68,9 @@ public:
       h = meld(merged[i], h);
     }
     root = h;
+  }
+  void swap(PairingHeap&other) noexcept {
+    std::swap(root, other.root);
   }
 
   [[nodiscard]] bool empty() const { return !root; }

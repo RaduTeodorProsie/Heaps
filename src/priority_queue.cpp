@@ -4,7 +4,8 @@
 #include <queue>
 #include <vector>
 
-template <typename T, typename Compare = std::less<T>> class PriorityQueue {
+template <typename T, typename Compare = std::less<T>> 
+class PriorityQueue {
   std::priority_queue<T, std::vector<T>, Compare> pq;
 
   // O(1) swap, top, O(log(heap_size)) for pop and push, O(log(heap_size))
